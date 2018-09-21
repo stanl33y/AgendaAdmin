@@ -1,0 +1,2 @@
+*.csproj  merge=union
+Gestcom/Views/Home/Index.cshtml  merge=union

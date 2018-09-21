@@ -1,0 +1,56 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="page-header hidden-print">
+                <div class="pull-right hidden-print">
+                    <button type="button" class="btn btn-success" data-ng-click="ctrl.AbrirModal()"><i class="fa fa-plus"></i> <span class="hidden-xs">Inserir</span></button>
+                </div>
+                <h1><i class="fa fa-calendar"></i> Agenda</h1>
+            </div>
+
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="#/"><i class="fa fa-home"></i> Página inicial</a></li>
+                <li><a><i class="fa fa-pencil"></i> Cadastro</a></li>
+                <li class="active">Agenda</li>
+            </ol>
+
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <label class="btn btn-primary" ng-model="ctrl.Calendar.View" uib-btn-radio="'year'">Ano</label>
+                            <label class="btn btn-primary" ng-model="ctrl.Calendar.View" uib-btn-radio="'month'">Mês</label>
+                            <label class="btn btn-primary" ng-model="ctrl.Calendar.View" uib-btn-radio="'week'">Semana</label>
+                            <label class="btn btn-primary" ng-model="ctrl.Calendar.View" uib-btn-radio="'day'">Dia</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-primary" mwl-date-modifier date="ctrl.Calendar.CurrentDay" decrement="ctrl.Calendar.View"><i class="fa fa-chevron-left"></i> Anterior</button>
+                            <button type="button" class="btn btn-primary" mwl-date-modifier date="ctrl.Calendar.CurrentDay" set-to-today>Hoje</button>
+                            <button type="button" class="btn btn-primary" mwl-date-modifier date="ctrl.Calendar.CurrentDay" increment="ctrl.Calendar.View">Próximo <i class="fa fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 text-center"><h2>{{ ctrl.Calendar.Title | uppercase}}</h2></div>
+                    <div class="col-xs-12">
+                        <mwl-calendar on-timespan-click="ctrl.Calendar.onTimespanClick(calendarDate)" view="ctrl.Calendar.View" view-date="ctrl.Calendar.CurrentDay" events="ctrl.Calendar.Events" view-title="ctrl.Calendar.Title" on-event-click="ctrl.Calendar.onEventClick(calendarEvent)" on-event-times-changed="ctrl.Calendar.onEventTimesChanged(calendarEvent, calendarNewEventStart, calendarNewEventEnd)" auto-open="true" day-view-start="08:00" day-view-end="20:00" day-view-split="15"></mwl-calendar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/ng-template" id="ModalExcluirAgenda.html">
+    <div class="modal-header"><h3>Confirmar Excluir</h3></div>
+    <div class="modal-body">
+        <p>Deseja realmente excluir o compromisso <strong>{{::ctrl.Agenda.title}}</strong>?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="ctrl.FecharModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="ctrl.ConfirmarExcluir()">Confirmar</button>
+    </div>
+</script>

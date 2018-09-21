@@ -1,0 +1,162 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="page-header">
+                <h1>
+                    <i ng-hide="ctrl.operador.OperadorID != null" class="fa fa-user-plus"></i>
+                    <i ng-hide="ctrl.operador.OperadorID == null" class="fa fa-pencil"></i> {{::ctrl.title}}
+                </h1>
+            </div>
+
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="#/"><i class="fa fa-home"></i> Página inicial</a></li>
+                <li><a><i class="fa fa-pencil"></i> Cadastro</a></li>
+                <li><a href="#/Operador"><i class="fa fa-user"></i> Operador</a></li>
+                <li class="active">{{::ctrl.Title}}</li>
+            </ol>
+
+            <div class="well">
+                <form name="form" autocomplete="off" ng-submit="ctrl.Enviar(form)">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" data-ng-class="{'has-error':(form.Funcionario.$dirty && form.Funcionario.$invalid) }">
+                                <label class="control-label" for="Funcionario">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Funcionario.$invalid"></i>
+                                    Funcionário
+                                </label>
+                                <select ng-model="ctrl.FuncionarioSelecionado" ng-disabled="ctrl.operador.OperadorID != null" name="Funcionario" class="form-control" ng-options="funcionario.Nome for funcionario in ctrl.Funcionarios" ng-required="ctrl.operador.OperadorID == null">
+                                    <option value="">Selecione o funcionário</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group" data-ng-class="{'has-error':(form.Identificador.$dirty && form.Identificador.$invalid) }">
+                                <label class="control-label" for="identificador">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Identificador.$invalid"></i>Identificador
+                                </label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="ctrl.operador.Identificador " name="Identificador" placeholder="Identificador" ng-required="true" ng-maxlength="255">
+                                    <div class="input-group-addon"> <i class="fa fa-user"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error': !ctrl.validaSenha() }">
+                                <label for="senha">Senha</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" ng-model="ctrl.Senha" name="Senha" placeholder="Senha" ng-required="ctrl.operador.OperadorID == null" uib-tooltip="A senha deve conter no mínimo 6 caracteres, possuir letras e números, ter pelo menos uma letra maiuscula e um caracter especial !" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!inputModel">
+                                    <div class="input-group-addon"><i class="fa fa-key"> </i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error': !ctrl.validaSenha() }">
+                                <label for="ConfirmaSenha">Confirma senha</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" ng-model="ctrl.ConfirmaSenha" name="ConfirmaSenha" placeholder="Senha" ng-required="ctrl.operador.OperadorID == null">
+                                    <div class="input-group-addon"><i class="fa fa-key"> </i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dtExpira">Data da expiração</label>
+                                <p class="input-group">
+                                    <input name="DtExpira" type="text" show-button-bar="true" class="form-control" clear-text="Limpar" close-text="Sair" current-text="Hoje" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.operador.DataExpiracao" is-open="ctrl.opened" uib-tooltip="Deixe vazio se não houver data de expiração" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!inputModel" readonly />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="ctrl.open($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error':(form.Situacao.$dirty && form.Situacao.$invalid) }">
+                                <label class="control-label" for="Situacao">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Situacao.$invalid"></i>
+                                    Situação
+                                </label>
+                                <p class="btn-group">
+                                    <div>
+                                        <select ng-model="ctrl.SituacaoSelecionado" name="Situacao" class="form-control" ng-options="situacao.Name for situacao in ctrl.Situacao" ng-required="true">
+                                            <option value="">Selecione a situação</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error':(form.GrupoAcesso.$dirty && form.GrupoAcesso.$invalid) }">
+                                <label class="control-label" for="grupo">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.GrupoAcesso.$invalid"></i>
+                                    Grupo de acesso
+                                </label>
+                                <p class="btn-group">
+                                    <div>
+                                        <select ng-model="ctrl.GrupoAcessoSelecionado" name="GrupoAcesso" class="form-control" ng-options="grupo.Descricao for grupo in ctrl.grupoAcesso" ng-required="true">
+                                            <option value="">Selecione o grupo</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="panel panel-info">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-9 col-xs-9">
+                                            <label for="enabled">Administrador</label>
+                                        </div>
+                                        <div class="col-md-3 col-xs-3">
+                                            <switch id="enabled" name="enabled" ng-model="ctrl.operador.Administrador" on="On" off="Off" class="green"></switch>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><label>Cargos</label></div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-3" ng-repeat="cargos in ctrl.cargo track by cargos.CargoID">
+                                            <label>
+                                                <input type="checkbox" checklist-model="ctrl.CargosSelecionados" checklist-value="cargos.CargoID"> {{cargos.Descricao}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-right:3px">
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <a class="btn btn-primary" href="#/operador"><i class="fa fa-sign-out"></i> Sair</a>
+                                <button type="submit" class="btn btn-success" data-ng-disabled="form.$invalid || !ctrl.validaSenha()"><i class="fa fa-floppy-o"></i> Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="page-header col-md-10 col-md-offset-1  col-lg-8 col-lg-offset-2">
+            <h1><i class="fa fa-user-plus"></i> {{::ctrl.title}}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="well">
+                <form name="form" autocomplete="off" ng-submit="ctrl.Enviar()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" data-ng-class="{'has-error': (form.Operadores.$dirty && form.Operadores.$invalid)}">
+                                <label for="Operadores"><i class="fa fa-users"></i> Operador</label>
+                                <select class="form-control" name="Operadores" ng-model="ctrl.OperadorSelecionado" ng-options="item.Identificador for item in ctrl.Operadores" ng-required="true">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group" data-ng-class="{'has-error': (form.Autorizador.$dirty && (form.Autorizador.$invalid || !ctrl.ValidaOperadores()))}">
+                                <label for="Autorizador"><i class="fa fa-user"></i> Autorizador</label>
+                                <select class="form-control" name="Autorizador" ng-model="ctrl.AutorizadorSelecionado" ng-options="item.Identificador for item in ctrl.Operadores" ng-required="true">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error': form.PInicial.$invalid }">
+                                <label for="PInicial">Período inicial</label>
+                                <p class="input-group">
+                                    <input name="PInicial" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.custodiaAcesso.PeriodoInicial" is-open="ctrl.opened" ng-required="true" show-button-bar="false" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="ctrl.open($event,0)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error': form.PFinal.$invalid || !ctrl.ValidaPeriodo() }">
+                                <label for="PFinal">Período final</label>
+                                <p class="input-group">
+                                    <input name="PFinal" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.custodiaAcesso.PeriodoFinal" is-open="ctrl.opened2" ng-required="true" show-button-bar="false" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="ctrl.open($event,1)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error':(form.Situacao.$dirty && form.Situacao.$invalid) }">
+                                <label for="Situacao">Situação</label>
+                                <p class="btn-group">
+                                    <div>
+                                        <select class="form-control" name="Situacao" ng-model="ctrl.SituacaoSelecionada" ng-options="situacao.Name for situacao in ctrl.Situacao" ng-required="true">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <a class="btn btn-primary" href="#/CustodiaAcesso"><i class="fa fa-sign-out"></i> Sair</a>
+                                <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || !ctrl.ValidaOperadores() || !ctrl.ValidaPeriodo()"><i class="fa fa-floppy-o"></i> Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

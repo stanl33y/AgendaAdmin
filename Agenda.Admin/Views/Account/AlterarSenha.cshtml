@@ -1,0 +1,65 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-6">
+            <div class="page-header">
+                <h1><i class="fa fa-key"></i> Alterar senha<small></small></h1>
+            </div>
+
+                <div class="col-md-12">
+                    <div class="well" style=" overflow: hidden; width:500px; height:400px;">
+                <form name="form" role="form" data-ng-submit="ctrl.Enviar()" novalidate autocomplete="off">
+                    <div class="form-group" data-ng-class="{'has-error': (form.SenhaAtual.$dirty && form.SenhaAtual.$invalid) }">
+                        <label for="SenhaAtual">Senha atual</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            <input type="password" data-ng-model="ctrl.ResetPassword.SenhaAtual" class="form-control" name="SenhaAtual" placeholder="Senha Atual" ng-required="true">
+                        </div>
+                    </div>
+                    <div class="form-group" data-ng-class="{'has-error': !ctrl.ValidaSenha() }">
+                        <label for="NovaSenha">Nova senha</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            <input type="password" data-ng-model="ctrl.ResetPassword.NovaSenha" class="form-control" name="NovaSenha" placeholder="Nova Senha" required>
+                        </div>
+                    </div>
+                    <div class="form-group" data-ng-class="{'has-error': !ctrl.ValidaSenha() }">
+                        <label for="ConfirmarNovaSenha">Confirmar nova senha</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            <input type="password" data-ng-model="ctrl.ResetPassword.ConfirmarNovaSenha" class="form-control" name="ConfirmarNovaSenha" placeholder="Confirmar Nova Senha" required>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit" data-ng-disabled="form.$pristine || form.$invalid || !ctrl.ValidaSenha() || ctrl.isLoading">
+                        <span data-ng-hide="ctrl.Loading">Enviar <i class="fa fa-sign-in"></i></span>
+                        <span data-ng-show="ctrl.Loading"><i class="fa fa-spin fa-refresh"></i></span>
+                    </button>
+                </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="page-header">
+                    <h1><i class="fa fa-picture-o" aria-hidden="true"></i> Alterar foto<small></small></h1>
+                </div>
+                <div class="col-md-12">
+                    <div class="well">
+                        <form name="form1" role="form1">
+                            <div class="row">
+                                <div ><input class="input-group" type="file" id="fileInput" /></div>
+                                <div class="form-control" style="  background: #ffffff; overflow: hidden; width:500px; height:305px">
+                                    <img-crop image="ctrl.myImage" result-image="ctrl.myCroppedImage"></img-crop>
+                                </div>
+                                <button class="btn btn-primary" ng-click="ctrl.SalvarImagem()">
+                                    <span>Enviar <i class="fa fa-sign-in"></i></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

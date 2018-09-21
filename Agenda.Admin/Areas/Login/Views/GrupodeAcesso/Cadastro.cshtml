@@ -1,0 +1,89 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="page-header col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <h1><i class="fa fa-user-plus"></i> {{::ctrl.Title}}</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="well">
+                <form name="form" autocomplete="off" ng-submit="ctrl.Enviar()">
+                    <div class="row">
+                        @* Descricao *@
+                        <div class="col-md-12">
+                            <div class="form-group" data-ng-class="{'has-error': (form.Descricao.$dirty && form.Descricao.$invalid) }">
+                                <label class="control-label" for="Descricao">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Descricao.$invalid"></i>
+                                    Descrição
+                                </label>
+                                <input ng-maxlength="50" type="text" class="form-control" data-ng-model="ctrl.GrupoAcesso.Descricao" name="Descricao" placeholder="Descricao" ng-required="true" />
+                            </div>
+                        </div>
+
+                        @* Dias de acesso *@
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Dias de acesso</label>
+                                <div class="checkbox" ng-repeat="item in ctrl.Dias">
+                                    <label>
+                                        <input name="Dias" type="checkbox" checklist-model="ctrl.DiasSelecionados" checklist-value="item.Valor"> {{item.Nome}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* Hora inicial *@
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error': (form.HorarioInicial.$dirty && form.HorarioInicial.$invalid) }">
+                                <label class="control-label">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.HorarioInicial.$invalid"></i>
+                                    Hora inicial
+                                </label>
+                                <div uib-timepicker name="HorarioInicial" data-ng-model="ctrl.GrupoAcesso.HorarioInicial" show-meridian="false" ng-required="true"></div>
+                            </div>
+                        </div>
+
+                        @* Hora final *@
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error': (form.HorarioFinal.$dirty && form.HorarioFinal.$invalid || !ctrl.ValidaData())}">
+                                <label class="control-label">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.HorarioFinal.$invalid"></i>
+                                    Hora final
+                                </label>
+                                <div uib-timepicker name="HorarioFinal" data-ng-model="ctrl.GrupoAcesso.HorarioFinal" show-meridian="false" ng-required="true"></div>
+                            </div>
+                        </div>
+
+                        @* Situação *@
+                        <div class="col-md-6">
+                            <div class="form-group" data-ng-class="{'has-error':(form.Situacao.$dirty && form.Situacao.$invalid) }">
+                                <label class="control-label" for="Situacao">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Situacao.$invalid"></i>
+                                    Situação
+                                </label>
+                                <p class="btn-group">
+                                    <div>
+                                        <select class="form-control" name="Situacao" ng-model="ctrl.SituacaoSelecionada" ng-options="situacao.Name for situacao in ctrl.Situacao" ng-required="true">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+
+                        @* Botões *@
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <a class="btn btn-primary" href="#/GrupodeAcesso"><i class="fa fa-sign-out"></i> Sair</a>
+                                <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || !ctrl.ValidaData()"><i class="fa fa-floppy-o"></i> Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div
+
+</div>

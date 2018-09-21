@@ -1,0 +1,72 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1  col-lg-8 col-lg-offset-2">
+            <div class="page-header">
+                <h1><i class="fa fa-suitcase"></i> {{::ctrl.Title}}</h1>
+            </div>
+
+            <ol class="breadcrumb hidden-xs">
+                <li><a href="#/"><i class="fa fa-home"></i> Página inicial</a></li>
+                <li><a><i class="fa fa-pencil"></i> Cadastro</a></li>
+                <li><a href="#/Cargo"><i class="fa fa-suitcase"></i> Cargo</a></li>
+                <li class="active">{{::ctrl.Title}}</li>
+            </ol>
+
+            <div class="well">
+                <form name="form" autocomplete="off" ng-submit="ctrl.Enviar()">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group" data-ng-class="{'has-error':(form.Descricao.$dirty && form.Descricao.$invalid) }">
+                                <label class="control-label" for="Descricao">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Descricao.$invalid"></i>
+                                    Descrição
+                                </label>
+                                <input type="text" class="form-control" ng-model="ctrl.Cargo.Descricao" name="Descricao" placeholder="Descrição" required maxlength="50">
+                            </div>
+
+                            <div class="form-group" data-ng-class="{'has-error':(form.Situacao.$dirty && form.Situacao.$invalid) }">
+                                <label class="control-label" for="Situacao">
+                                    <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Situacao.$invalid"></i>
+                                    Situação
+                                </label>
+                                <select class="form-control" ng-model="ctrl.SituacaoSelecionado" name="Situacao" class="form-control" ng-options="situacao.Name for situacao in ctrl.Situacao" ng-required="true">
+                                    <option value="">Selecione a situação</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="identificador"><i class="fa fa-sitemap"></i> Menus</label>
+                                <div class="input-group" style="margin-bottom:10px">
+                                    <input type="text" class="form-control" ng-model="ctrl.Search" placeholder="Pesquisa" uib-tooltip="Utilize este campo para pesquisar itens do menu" tooltip-placement="top" tooltip-trigger="mouseenter">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </span>
+                                </div>
+
+                                <div ivh-treeview="ctrl.Menus"
+                                     ivh-treeview-id-attribute="'MenuID'"
+                                     ivh-treeview-label-attribute="'Descricao'"
+                                     ivh-treeview-children-attribute="'MenusFilhos'"
+                                     ivh-treeview-selected-attribute="'Selecionado'"
+                                     ivh-treeview-twistie-collapsed-tpl="'<i class=\'fa fa-plus-square\'></i>'"
+                                 ivh-treeview-twistie-expanded-tpl="'<i class=\'fa fa-minus-square\'></i>'"
+                                 ivh-treeview-twistie-leaf-tpl="'-'"
+                                 ivh-treeview-expand-to-depth="-1"
+                                 ivh-treeview-filter="ctrl.Search">
+                            </div>
+                            </div>
+
+
+                            <div class="pull-right">
+                                <a class="btn btn-primary" href="#/cargo"><i class="fa fa-sign-out"></i> Sair</a>
+                                <button type="submit" class="btn btn-success" data-ng-disabled="form.$invalid"><i class="fa fa-floppy-o"></i> Salvar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

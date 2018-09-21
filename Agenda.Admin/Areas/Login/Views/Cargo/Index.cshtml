@@ -1,0 +1,80 @@
+﻿<div class="container">
+    <div class="page-header hidden-print">
+        <div class="pull-right hidden-print">
+            <button type="button" class="btn btn-primary" data-ng-click="ctrl.Relatorio()"><i class="fa fa-print"></i> <span class="hidden-xs">Listagem</span></button>
+            <a class="btn btn-success" href="#/Cargo/cadastro"><i class="fa fa-plus"></i> <span class="hidden-xs">Inserir</span></a>
+        </div>
+        <h1><i class="fa fa-suitcase"></i> Cargos</h1>
+    </div>
+
+    <div class="row">
+        <div class=" col-sm-9 hidden-print hidden-xs">
+            <ol class="breadcrumb">
+                <li><a href="#/"><i class="fa fa-home"></i> Página inicial</a></li>
+                <li><a><i class="fa fa-pencil"></i> Cadastro</a></li>
+                <li class="active"><i class="fa fa-suitcase"></i> Cargo</li>
+            </ol>
+        </div>
+        <div class="col-sm-3">
+            <div class="input-group hidden-print" style="margin-bottom:10px">
+                <input class="form-control" ng-model="ctrl.Search" autocomplete="off" placeholder="Pesquisa" type="search" /> <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="visible-print">
+                        <th colspan="3" class="text-center">
+                            <h3>Relatório de cargos</h3>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="text-center hidden-xs" style="width:50px;">#</th>
+                        <th>Descrição</th>
+                        <th class="text-center hidden-xs" style="width:50px;">Situação</th>
+                        <th colspan="2" class="text-center hidden-print">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in ctrl.Cargos | filter: { Descricao: ctrl.Search } track by item.CargoID">
+                        <th class="text-center hidden-xs">{{::item.CargoID}}</th>
+                        <td>{{::item.Descricao}}</td>
+                        <td class="text-center hidden-xs" ng-switch="item.Situacao">
+                            <span ng-switch-when="0" style="color: #ff0000;"><i uib-tooltip="Cancelado" class="fa fa-2x fa-ban"></i></span>
+                            <span ng-switch-when="1" style="color: #29a300;"><i uib-tooltip="Ativo" class="fa fa-2x fa-check-circle"></i></span>
+                        </td>
+                        <td class="hidden-print text-center table-button">
+                            <button type="button" class="btn btn-primary" ng-click="ctrl.Editar(item)"><i class="fa fa-pencil"></i> <span class="hidden-xs">Alterar</span></button>
+                        </td>
+                        <td class="hidden-print text-center table-button">
+                            <button type="button" class="btn btn-danger" ng-click="ctrl.AbrirModal(item)"><i class="fa fa-trash-o"></i> <span class="hidden-xs">Excluir</span></button>
+                        </td>
+                    </tr>
+                    <tr ng-show="!(ctrl.Cargos | filter: { Descricao: ctrl.Search }).length">
+                        <td colspan="5">Nenhum registro encontrado.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ModalExcluirCargo.html">
+    <div class="modal-header">
+        <h3>Confirmar Excluir</h3>
+    </div>
+
+    <div class="modal-body">
+        <p>Deseja realmente excluir o cargo <strong>{{::ctrl.Cargo.Descricao}}</strong></p>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="ctrl.FecharModal()">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="ctrl.ConfirmarExcluir()">Confirmar</button>
+    </div>
+</script>

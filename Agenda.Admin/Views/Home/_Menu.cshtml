@@ -1,0 +1,42 @@
+﻿<div data-ng-controller="MenuController as ctrl">
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" aria-expanded="false" ng-init="ctrl.navCollapsed = true" ng-click="ctrl.navCollapsed = !ctrl.navCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/Home">
+                    <img src="@Url.Content("~/Content/imagens/logo_brand.png")" alt="" />
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" ng-class="{'in':!ctrl.navCollapsed}">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#/usuarios">
+                            <i class="fa fa-user"></i> Usuários
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#/agenda">
+                            <i class="fa fa-calendar"></i> Agenda
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown" uib-dropdown>
+                        <a href="#" class="dropdown-toggle" uib-dropdown-toggle> Olá @ViewBag.UsuarioLogado <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/alterar-senha" title="Alterar Senha"><i class="fa fa-user"></i> Perfil</a></li>
+                            <li class="divider"></li>
+                            <li><a data-ng-click="ctrl.Logoff()" href="#"><i class="fa fa-sign-out"></i> Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

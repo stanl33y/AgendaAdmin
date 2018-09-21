@@ -1,0 +1,87 @@
+﻿<form name="form" autocomplete="off" data-ng-submit="ctrl.Enviar()">
+    <div class="modal-header">
+        <h3 class="modal-title"><i class="fa fa-calendar"></i> {{::ctrl.Title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="well">
+            <div class="panel panel-default" style="margin-bottom: 0;">
+                <div class="panel-body">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group" data-ng-class="{'has-error':(form.Titulo.$dirty && form.Titulo.$invalid) }">
+                                            <label class="control-label" for="Titulo">
+                                                <i class="fa fa-asterisk icon-required pull-right icon-required pull-right" data-ng-show="form.Titulo.$invalid"></i>
+                                                Título
+                                            </label>
+                                            <input type="text" class="form-control" data-ng-model="ctrl.Agenda.Titulo" name="Titulo" placeholder="Título" required maxlength="250">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group" data-ng-class="{'has-error':(form.Descricao.$dirty && form.Descricao.$invalid) }">
+                                            <label class="control-label" for="Descricao">
+                                                <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Descricao.$invalid"></i>
+                                                Descrição
+                                            </label>
+                                            <textarea name="Descricao" class="form-control" rows="3" data-ng-model="ctrl.Agenda.Descricao" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="form-group" data-ng-class="{'has-error':(form.DataInicio.$invalid || !ctrl.ValidaDatas()) }">
+                                            <label class="control-label" for="Descricao">
+                                                <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.DataInicio.$invalid || !ctrl.ValidaDatas()"></i>
+                                                Data de início
+                                            </label>
+                                            <div class="input-group">
+                                                <input name="DataInicio" type="text" datepicker-options="{showWeeks:false}" show-button-bar="true" class="form-control" clear-text="Limpar" close-text="Sair" current-text="Hoje" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.Agenda.DataInicio" is-open="ctrl.DatePickerDataInicio" required />
+                                                <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="ctrl.AbrirDatePicker($event, 'DatePickerDataInicio')"><i class="fa fa-calendar"></i></button></span>
+                                            </div>
+                                            <p class="text-danger" data-ng-show="(form.DataInicio.$invalid || !ctrl.ValidaDatas())">Início deve ser menor que data final</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5"><div style="margin-top:-10px;"><div uib-timepicker ng-model="ctrl.Agenda.DataInicio" show-meridian="false"></div></div></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-7">
+                                        <div class="form-group" data-ng-class="{'has-error':(form.DataFim.$dirty && form.DataFim.$invalid) }">
+                                            <label class="control-label" for="DataFim">
+                                                <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.DataFim.$invalid"></i>
+                                                Data final
+                                            </label>
+                                            <div class="input-group">
+                                                <input name="DataFim" type="text" datepicker-options="{showWeeks:false}" show-button-bar="true" class="form-control" clear-text="Limpar" close-text="Sair" current-text="Hoje" uib-datepicker-popup="dd/MM/yyyy" ng-model="ctrl.Agenda.DataFim" is-open="ctrl.DatePickerDataFim" required />
+                                                <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="ctrl.AbrirDatePicker($event, 'DatePickerDataFim')"><i class="fa fa-calendar"></i></button></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-5"><div style="margin-top:-10px;"><div uib-timepicker ng-model="ctrl.Agenda.DataFim" show-meridian="false"></div></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group" data-ng-class="{'has-error':(form.Marcador.$dirty && form.Marcador.$invalid) }">
+                                    <label class="control-label" for="Marcador">
+                                        <i class="fa fa-asterisk icon-required pull-right" data-ng-show="form.Marcador.$invalid"></i>
+                                        Marcador
+                                    </label>
+                                    <select ng-model="ctrl.MarcadorSelecionado" name="Marcador" class="form-control" ng-options="marcador.Name for marcador in ctrl.Marcadores" required></select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-ng-click="ctrl.FecharModal()"><i class="fa fa-sign-out"></i> Sair</button>
+        <button type="submit" class="btn btn-success" data-ng-disabled="form.$invalid || !ctrl.ValidaDatas()"><i class="fa fa-floppy-o"></i> Salvar</button>
+    </div>
+</form>
